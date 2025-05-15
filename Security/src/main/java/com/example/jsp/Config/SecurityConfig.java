@@ -21,8 +21,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 	
 	//comment this for in-memory if wannt to encrypt (use custom UserDetailsService) decomment this and comment temporary authorization userDetailsService() method and also change in dao
-//	@Autowired
-//	private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -44,22 +44,22 @@ public class SecurityConfig {
 	}
 	
 	//If i want multiple users authorization -- Temporary Authorization
-	@Bean
-	public UserDetailsService userDetailsService() {
-		UserDetails user1 = User.withUsername("smith").
-				password(passwordEncoder()
-				.encode("s@123"))
-				.roles("USER")
-				.build();
-		
-		UserDetails user2 = User.withUsername("riya").
-				password(passwordEncoder()
-				.encode("r@123"))
-				.roles("ADMIN")
-				.build();
-		
-		return new InMemoryUserDetailsManager(user1,user2);
-	}
+//	@Bean
+//	public UserDetailsService userDetailsService() {
+//		UserDetails user1 = User.withUsername("smith").
+//				password(passwordEncoder()
+//				.encode("s@123"))
+//				.roles("USER")
+//				.build();
+//		
+//		UserDetails user2 = User.withUsername("riya").
+//				password(passwordEncoder()
+//				.encode("r@123"))
+//				.roles("ADMIN")
+//				.build();
+//		
+//		return new InMemoryUserDetailsManager(user1,user2);
+//	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -71,7 +71,7 @@ public class SecurityConfig {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 		//authenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
-		authenticationProvider.setUserDetailsService(userDetailsService());
+		authenticationProvider.setUserDetailsService(userDetailsService);
 		
 		return authenticationProvider;
 	}
