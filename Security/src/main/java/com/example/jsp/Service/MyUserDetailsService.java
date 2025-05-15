@@ -12,7 +12,7 @@ import com.example.jsp.Config.MyUserDetails;
 import com.example.jsp.Entity.Users;
 import com.example.jsp.Repository.UsersRepositiory;
 
-//@Service
+@Service
 public class MyUserDetailsService implements UserDetailsService {
 
 	@Autowired

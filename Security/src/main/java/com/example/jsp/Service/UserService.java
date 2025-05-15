@@ -16,10 +16,10 @@ public class UserService {
 	@Autowired
 	private UsersRepositiory usersRepositiory;
 	
-	//private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
 	public Users saveUser(Users user) {
-		//user.setPassword(encoder.encode(user.getPassword()));
+		user.setPassword(encoder.encode(user.getPassword()));
 		return usersRepositiory.save(user);
 	}
 
